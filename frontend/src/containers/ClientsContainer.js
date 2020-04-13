@@ -58,9 +58,6 @@ class ClientsContainer extends Component {
   }
 
   handleDeleteClient = (id) => {
-
-    const { currentPage } = this.state
-
     this.props.onDeleteClient(id)
   }
 
