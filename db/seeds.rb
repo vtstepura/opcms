@@ -1,7 +1,7 @@
 maneger = Maneger.create(
   name: 'Eugene',
-  email: 'eugene@naprok.com',
-  password: '12jktuhjnnt',
+  email: 'eugene@example.com',
+  password: '11111111',
   password_confirmation: '12jktuhjnnt'
 )
 
