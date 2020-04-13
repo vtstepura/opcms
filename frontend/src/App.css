@@ -1,0 +1,95 @@
+/*SignInPage*/
+
+.login-form {
+  width: 100%;
+  max-width: 330px;
+}
+
+.auth {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+/*ClientsPage*/
+
+.pagination {
+  justify-content: center;
+}
+
+.input {
+  flex: 1;
+  margin-right: 10px
+}
+
+.client {
+  height: 90vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.client-list {
+  height: 680px;
+}
+table {
+  width: 100%;
+  text-align: center;
+}
+td {
+  max-width: 120px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  height: 50px;
+}
+
+.client-form {
+  display: flex;
+}
+
+.history-column {
+  max-width: 200px;
+  cursor: pointer;
+  text-align: left;
+}
+
+.manager-name {
+  font-weight: bold;
+}
+/*HIstiryPage*/
+.history {
+  height: 90vh;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+.history-form {
+  display: flex;
+}
+.history-list {
+  height: 680px;
+}
+
+.action {
+  width: 60%;
+  text-align: left;
+}
+
+/*EditPage*/
+.edit {
+  display: flex;
+  height: 90vh;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/*ColorPicker*/
+
+ .colorPicker {
+   border: 3px solid;
+ }

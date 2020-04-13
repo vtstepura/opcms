@@ -1,0 +1,8 @@
+{
+  "name": "opcms2",
+  "private": true,
+  "dependencies": {
+    "loadash": "^1.0.0",
+    "reactstrap": "^8.4.1"
+  }
+}
