@@ -1,8 +1,30 @@
 {
-  "name": "opcms2",
+  "name": "opcms",
   "private": true,
   "dependencies": {
     "loadash": "^1.0.0",
     "reactstrap": "^8.4.1"
-  }
+  },
+  "description": "This test app created by React.js ![Generic badge](https://img.shields.io/badge/react.js-16.13.1-green) and RoR ![Generic badge](https://img.shields.io/badge/ror-5.2.4-green)",
+  "version": "1.0.0",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+      "build": "cd client && npm install && npm run build && cd ..",
+      "deploy": "cp -a client/build/. public/",
+      "postinstall": "npm run build && npm run deploy && echo 'Client built!'"
+    },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vtstepura/opcms.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vtstepura/opcms/issues"
+  },
+  "homepage": "https://github.com/vtstepura/opcms#readme"
 }
