@@ -1,8 +1,8 @@
 maneger = Maneger.create(
   name: 'Eugene',
   email: 'eugene@example.com',
-  password: '11111111',
-  password_confirmation: '12jktuhjnnt'
+  password: 'password',
+  password_confirmation: 'password'
 )
 
 client = Client.create(
