@@ -55,11 +55,7 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'foreman'
-  gem 'sqlite3'
-end
-
-group :production do
-  gem "pg"
+  gem 'pg'
 end
 
 group :test do
