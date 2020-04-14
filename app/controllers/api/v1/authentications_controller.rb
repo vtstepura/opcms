@@ -5,7 +5,7 @@ class Api::V1::AuthenticationsController < ApplicationController
     maneger = Maneger.find_by(email: params[:email])
 
     if maneger&.authenticate(params[:password])
-      JWT.encode(maneger, ENV["JWT_SECRET"])
+      generate_token(maneger)
       cookies.signed[:jwt] = {
         value: generate_token(maneger),
         httponly: true,
