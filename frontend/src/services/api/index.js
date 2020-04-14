@@ -19,8 +19,7 @@ export const parseSettings = ({
   const headers = {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    'Accept-Language': locale,
-    'Access-Control-Allow-Origin': '*'
+    'Accept-Language': locale
   }
   const settings = merge({
     body: data ? JSON.stringify(data) : undefined,
