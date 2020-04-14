@@ -1,12 +1,11 @@
 # frozen_string_literal: true
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
- allow do
-   origins ['localhost:3001']
+  allow do
 
-   resource '*',
-     headers: :any,
-     methods: %i(get post put patch delete options head),
-     credentials: true
- end
+    resource '*',
+    origins '*',
+    headers: :any,
+    methods: %i(get post put patch delete options head)
+  end
 end
