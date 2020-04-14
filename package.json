@@ -5,9 +5,6 @@
     "loadash": "^1.0.0",
     "reactstrap": "^8.4.1"
   },
-  "engines": {
-    "node": "6.3.1"
-  },
   "description": "This test app created by React.js ![Generic badge](https://img.shields.io/badge/react.js-16.13.1-green) and RoR ![Generic badge](https://img.shields.io/badge/ror-5.2.4-green)",
   "version": "1.0.0",
   "main": "index.js",
