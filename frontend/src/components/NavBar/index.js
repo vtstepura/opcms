@@ -8,20 +8,21 @@ class NavBar extends Component {
     const { history } = this.props
     console.log(history)
     return (
-      <Navbar bg="light" expand="lg">
-        <Container>
+      <Navbar bg="light" expand="lg" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 70, flexDirection: 'row'}}>
+        <div style={{ width: '73%',}}>
         <Nav>
           <Nav.Link onClick={() => history.push('/')} style={{ fontSize: 20, fontWeight: 'bold'}}>Client</Nav.Link>
+          <Navbar.Collapse id="basic-navbar-nav">
+            <Nav className="mr-auto">
+            </Nav>
+            <Form inline>
+              <Navbar.Brand>Eugene</Navbar.Brand>
+              <Button onClick={() => this.props.onDeleteAuth()}>Log Out</Button>
+            </Form>
+          </Navbar.Collapse>
         </Nav>
-        <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="mr-auto">
-          </Nav>
-          <Form inline>
-            <Navbar.Brand>Eugene</Navbar.Brand>
-            <Button onClick={() => this.props.onDeleteAuth()}>Log Out</Button>
-          </Form>
-        </Navbar.Collapse>
-        </Container>
+
+        </div>
       </Navbar>
     )
   }

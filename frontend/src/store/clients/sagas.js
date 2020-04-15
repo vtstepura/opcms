@@ -28,6 +28,7 @@ function* deleteResource(api, { resource, thunk }) {
   try {
     const detail = yield call([api, api.delete], `/${resource}`)
     yield put(actions.resourceDeleteSuccess(resource, detail, thunk))
+    yield put(actions.resourceGetRequest('/clients', detail, thunk))
     toastr.success('Success! Deleted client!')
   } catch (e) {
     yield put(actions.resourceDeleteFailure(resource, e, thunk))
@@ -48,6 +49,7 @@ function* updateResource(api, { data }, { resource, thunk }) {
   try {
     const detail = yield call([api, api.put], `/${resource}`,  data)
     yield put(actions.resourceUpdateSuccess(resource, detail, { data }, thunk))
+    yield put(actions.resourceGetRequest('/clients', detail, thunk))
     toastr.success('Success', 'Updated!')
   } catch (e) {
     yield put(actions.resourceUpdateFailure(resource, e, { data }, thunk))

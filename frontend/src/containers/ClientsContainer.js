@@ -65,8 +65,6 @@ class ClientsContainer extends Component {
 
   handleDeleteClient = (id) => {
     this.props.onDeleteClient(id)
-
-    this.props.getClientsPagination(this.state.currentPage)
   }
 
   handleOpenColorPicker= (id, color) => {
@@ -89,8 +87,6 @@ class ClientsContainer extends Component {
     const { client_id, currentPage } = this.state
 
     this.props.setColor(client_id, { color: color.hex })
-
-    this.props.getClientsPagination(currentPage)
 
     this.setState({ colorPickerOpen: false })
   }
