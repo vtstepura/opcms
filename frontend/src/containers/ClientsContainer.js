@@ -107,7 +107,6 @@ class ClientsContainer extends Component {
   }
 
   render() {
-    console.log(this.state.client)
     return (
       <div>
         <NavBar history={this.props.history} />

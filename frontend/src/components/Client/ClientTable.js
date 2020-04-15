@@ -19,7 +19,7 @@ const ClientTable = ({
   clientInputOpen,
   handleOpenEdit
 }) => (
-  <Table bordered>
+  <Table style={{ display: 'table' }} style={{}} bordered>
     <thead>
       <tr>
         <th style={{ width: 150 }}></th>
@@ -37,13 +37,13 @@ const ClientTable = ({
         <tr className='main' key={client.id} style={{ backgroundColor: client.attributes.color}}>
           <td className='icon' >
               <div className='icon-items'>
-                <MdPalette onClick={() => handleOpenColorPicker(client.id, client.attributes.color)} />
+                <MdPalette onClick={() => {!colorPickerOpen ? handleOpenColorPicker(client.id, client.attributes.color) : handleCloseColorPicker()}} />
                 <MdCreate onClick={() => history.push(`/client/${client.id}/edit`) }/>
-                <MdDelete onClick={() => handleDeleteClient(client.id)}/>
+                <MdDelete onClick={() =>  handleDeleteClient(client.id) }/>
                 </div>
 
                 <div
-                  className='twitter-picker' s
+                  className='twitter-picker'
                   style={{ visibility: colorPickerOpen ?  client_id === client.id ? 'visible' : 'null' : 'hidden' }}>
                 <TwitterPicker
                   colors={['#CAF7AE', '#FFFFC3', '#E6FFF9', '#ACC7ED', '#F4AD9C', '#DEACC3', '#E5E5E5', '#FFFFFF']}
@@ -60,7 +60,7 @@ const ClientTable = ({
           <td>{client.attributes.budget}</td>
           <td>{client.attributes.start_date}</td>
           <td className='history-column'>
-            <span onClick={() => history.push(`/history/${client.id}`, client)}>
+            <span style={{ display: 'block', width: 300, overflow: 'hidden', textOverflow: 'ellipsis', minWidth: '100%' }} onClick={() => history.push(`/history/${client.id}`, client)}>
               { client.attributes.last_history ? (
               <span>
                 <span className='manager-name'>

@@ -12,8 +12,8 @@ const ClientForm = ({ handleChange, client, departments, handleCreateClient }) =
             <option id = { d.id } key={ d.id } value={ d.name } >{d.name}</option>
           )};
         </Form.Control>
-      <Form.Control className='input' onChange={handleChange} placeholder="Estimate" name="estimate"/>
-      <Form.Control className='input' onChange={handleChange} placeholder="Budget" name="budget" />
+      <Form.Control className='input' type="number" onChange={handleChange} placeholder="Estimate" name="estimate"/>
+      <Form.Control className='input' type="number" onChange={handleChange} placeholder="Budget" name="budget" />
       <Form.Control className='input' type='date' onChange={handleChange} placeholder="start_date" name="start_date" />
       <Button variant="primary" onClick={() => handleCreateClient(client)}>Create</Button>
     </Form.Group>
