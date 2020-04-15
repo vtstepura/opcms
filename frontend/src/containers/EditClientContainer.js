@@ -11,8 +11,7 @@ class EditClientContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      clientForm: {
-      },
+      clientForm: {},
       departments: [
         {id:1, name: 'MileStep'},
         {id: 2, name: 'LibiSoft'}
@@ -45,11 +44,10 @@ class EditClientContainer extends Component {
 
   render() {
     const { clientForm } = this.state
-    console.log(clientForm)
     return (
       !isEmpty(this.props.client) &&
       <div>
-        <NavBar />
+        <NavBar history={this.props.history} />
         <EditClient
           {...this.props}
           clientForm={this.state.clientForm}

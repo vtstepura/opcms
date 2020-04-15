@@ -2,7 +2,7 @@ import React from 'react'
 import { Table } from 'react-bootstrap'
 
 const HistoryTable = ({ history }) => (
-  <Table bordered className='history-table'>
+  <Table bordered>
     <thead>
       <tr>
         <th>Date</th>

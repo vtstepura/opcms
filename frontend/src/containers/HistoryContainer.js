@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { resourceGetRequest, resourceCreateRequest } from '../store/history/actions'
+import { resourceShowRequest } from '../store/clients/actions'
 
 import History from '../components/History'
 import NavBar from '../components/NavBar'
@@ -15,11 +16,18 @@ class HistoryContainer extends Component {
         action: '',
         date: new Date()
       },
-      currentPage: 1
+      currentPage: 1,
+      currentClient: {
+        name: this.props.location.state.attributes.name,
+        project: this.props.location.state.attributes.project,
+        department: this.props.location.state.attributes.department
+      }
     }
   }
 
   componentDidMount() {
+    this.props.onShowClient()
+
     this.props.getHistory()
   }
 
@@ -40,32 +48,43 @@ class HistoryContainer extends Component {
     this.props.getHistoryPagitation(page)
   }
 
+  handleCreateHistory = (data) => {
+    this.props.onCreateHistory(data)
+
+    this.props.getHistoryPagitation(this.state.currentPage)
+  }
+
+
   render() {
-    console.log(this.state.historyForm)
     return (
       <div>
-      <NavBar />
-      <History
-        {...this.props}
-        onSetDate={this.onSetDate}
-        handleChange={this.handleChange}
-        historyForm={this.state.historyForm}
-        currentPage={this.state.currentPage}
-        onChange={this.onChange}
-      />
+        <NavBar history={this.props.history} />
+        <History
+          {...this.props}
+          onSetDate={this.onSetDate}
+          handleChange={this.handleChange}
+          historyForm={this.state.historyForm}
+          currentPage={this.state.currentPage}
+          onChange={this.onChange}
+          handleCreateHistory={this.handleCreateHistory}
+          client={this.state.currentClient}
+          historyData={this.props.historyData}
+        />
       </div>
     )
   }
 }
 
 const mapStateToProps = (state) => ({
-  history: state.history.data,
-  pagy: state.history.pagy
+  historyData: state.history.data,
+  pagy: state.history.pagy,
+  loading: state.clients.loading
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {
   const { id } = ownProps.match.params
   return ({
+    onShowClient: () => dispatch(resourceShowRequest(`/clients/${id}`)),
     getHistory: () => dispatch(resourceGetRequest(`history?client_id=${id}`)),
     onCreateHistory: (data) => dispatch(resourceCreateRequest('history', data)),
     getHistoryPagitation: (page) => dispatch(resourceGetRequest(`history?client_id=${id}&page=${page}`))

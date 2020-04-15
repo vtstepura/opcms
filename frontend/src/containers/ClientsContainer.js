@@ -4,6 +4,11 @@ import { connect } from 'react-redux'
 import Client from '../components/Client'
 import NavBar from '../components/NavBar'
 import { resourceGetRequest, resourceCreateRequest, resourceDeleteRequest, resourceUpdateRequest } from '../store/clients/actions'
+import { Form, Button } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
+import { MdPalette, MdCreate, MdDelete} from 'react-icons/md'
+import { TwitterPicker } from 'react-color';
+
 
 class ClientsContainer extends Component {
   constructor(props) {
@@ -25,7 +30,8 @@ class ClientsContainer extends Component {
       colors: [ '#CAF7AD', '#FFFFC3', '#F4AD9C', '#DEACC3', '#FFFFFF', '#E5E5E5'],
       client_id: null,
       color: '',
-      colorPickerOpen: false
+      colorPickerOpen: false,
+      clientInputOpen: false
     }
   }
 
@@ -79,10 +85,12 @@ class ClientsContainer extends Component {
     this.setState({ colorPickerOpen: false })
   }
 
-  handleSaveColor = () => {
-    const { client_id, color } = this.state
+  handleSaveColor = (color) => {
+    const { client_id, currentPage } = this.state
 
-    this.props.setColor(client_id, { color })
+    this.props.setColor(client_id, { color: color.hex })
+
+    this.props.getClientsPagination(currentPage)
 
     this.setState({ colorPickerOpen: false })
   }
@@ -94,7 +102,16 @@ class ClientsContainer extends Component {
      })
   }
 
+  handleOpenEdit = (client) => {
+    this.setState({
+      client: client.attributes,
+      client_id: client.id,
+      clientInputOpen: true
+    })
+  }
+
   render() {
+    console.log(this.state.client)
     return (
       <div>
         <NavBar history={this.props.history} />
@@ -118,6 +135,8 @@ class ClientsContainer extends Component {
           handleCancel={this.handleCancel}
           client_id={this.state.client_id}
           handleDeleteClient={this.handleDeleteClient}
+          clientInputOpen={this.state.clientInputOpen}
+          handleOpenEdit={this.handleOpenEdit}
         />
       </div>
     )

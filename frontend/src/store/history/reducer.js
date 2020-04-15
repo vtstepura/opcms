@@ -36,8 +36,7 @@ export default (state = initialResourceState, { type, payload }) => {
   case constant.RESOURCE_CREATE_SUCCESS:
     return {
       ...state,
-      loading: false,
-      data: [...state.data, payload.data]
+      loading: false
     }
   case constant.RESOURCE_CREATE_FAILURE:
     return {

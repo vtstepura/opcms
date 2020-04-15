@@ -26,24 +26,18 @@ const Client = ({
   history,
   handleCancel,
   client_id,
-  onDeleteClient
+  onDeleteClient,
+  renderRow,
+  clientInputOpen,
+  handleOpenEdit
  }) => (
   <div className='client'>
-    <Container>
       <div className='client-list'>
         <ClientForm
           handleChange={handleChange}
           client={client}
           departments={departments}
           handleCreateClient={handleCreateClient}
-        />
-        <ColorPicker
-          colors={colors}
-          handleChangeColor={handleChangeColor}
-          handleSaveColor={handleSaveColor}
-          colorPickerOpen={colorPickerOpen}
-          handleCancel={handleCancel}
-          chooseColor={color}
         />
         <ClientTable
           clients={clients}
@@ -56,6 +50,11 @@ const Client = ({
           color={color}
           client_id={client_id}
           handleDeleteClient={handleDeleteClient}
+          handleSaveColor={handleSaveColor}
+          renderRow={renderRow}
+          clientInputOpen={clientInputOpen}
+          handleOpenEdit={handleOpenEdit}
+          handleChange={handleChange}
         />
       </div>
       <Paginator
@@ -63,7 +62,6 @@ const Client = ({
         totalPages={pagy.pages}
         onChange={onChange}
       />
-    </Container>
   </div>
 )
 

@@ -1,5 +1,7 @@
 class History < ApplicationRecord
-  belongs_to :client
 
+  validates :date, :action, presence: true
+
+  belongs_to :client
   belongs_to :maneger
 end

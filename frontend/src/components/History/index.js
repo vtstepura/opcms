@@ -2,26 +2,29 @@ import React from 'react'
 import { Container } from 'react-bootstrap'
 import HistoryForm from './HistoryForm'
 import HistoryTable from './HistoryTable'
+import ClientInformation from './ClientInformation'
 import Paginator from '../Paginator'
 
-const History = ({ history, historyForm, onSetDate, handleChange, onCreateHistory, pagy, currentPage, onChange }) => (
-  <div className='client'>
-  <Container>
-    <div className='history-list'>
-      <HistoryForm
-        handleChange={handleChange}
-        onCreateHistory={onCreateHistory}
-        historyForm={historyForm}
-      />
-      <HistoryTable history={history} />
+const History = ({ historyData, historyForm, onSetDate, handleChange, onCreateHistory, pagy, currentPage, onChange, handleCreateHistory, client }) => {
+  return (
+    <div className='history'>
+      <div className='history-list'>
+        <ClientInformation client={client} />
+        <HistoryForm
+          handleChange={handleChange}
+          handleCreateHistory={handleCreateHistory}
+          historyForm={historyForm}
+        />
+        <HistoryTable history={historyData} />
     </div>
     <Paginator
       currentPage={currentPage}
       totalPages={pagy.pages}
       onChange={onChange}
     />
-  </Container>
-</div>
-)
+  </div>
+  )
+
+}
 
 export default History

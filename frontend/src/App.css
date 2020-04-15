@@ -29,20 +29,22 @@
   align-items: center;
   justify-content: center;
   display: flex;
+  flex-direction: column
 }
 .client-list {
-  height: 680px;
+  height: 620px;
 }
 table {
   width: 100%;
   text-align: center;
 }
 td {
-  max-width: 120px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   height: 50px;
+  max-width: 120;
+  min-width: 100px
 }
 
 .client-form {
@@ -50,7 +52,7 @@ td {
 }
 
 .history-column {
-  max-width: 200px;
+  max-width: 15%;
   cursor: pointer;
   text-align: left;
 }
@@ -65,12 +67,15 @@ td {
   align-items: center;
   justify-content: center;
   display: flex;
+  flex-direction: column;
 }
 .history-form {
   display: flex;
+  width: 100%
 }
 .history-list {
-  height: 680px;
+  height: 700px;
+  width: 70%;
 }
 
 .action {
@@ -93,3 +98,22 @@ td {
  .colorPicker {
    border: 3px solid;
  }
+
+.icon-items {
+  display: block;
+}
+
+.icon {
+  width: 100px;
+}
+
+tr:hover > .icon > .icon-items {
+  display: block
+}
+
+.history-column {
+  min-width: 50%
+}
+.twitter-picker {
+  position: absolute;
+}
