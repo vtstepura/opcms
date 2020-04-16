@@ -6,7 +6,6 @@ import { resourceDeleteRequest } from '../../store/auth/actions'
 class NavBar extends Component {
   render(){
     const { history } = this.props
-    console.log(history)
     return (
       <Navbar bg="light" expand="lg" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 70, flexDirection: 'row'}}>
         <div style={{ width: '73%',}}>

@@ -1,7 +1,6 @@
 import React from 'react'
 
 const ClientInformation = ({ client }) => {
-  console.log(client.client)
   return (
     <div style={{ width: '60%', justifyContent: 'space-between', display: 'flex', height: 70, alignItems: 'center' }}>
       <span style={{ fontWeight: 'bold', fontSize: 18}}>Client:<span style={{ fontWeight: 'normal'}}> {client.name}</span></span>

@@ -4,8 +4,7 @@ import { TwitterPicker } from 'react-color';
 import { Form, Button, FormGroup } from 'react-bootstrap'
 
 
-const ClientRow = ({ client, handleOpenColorPicker, handleDeleteClient, history, client_id, colorPickerOpen, handleSaveColor, clientInputOpen, handleOpenEdit, handleChange, clientForm, handleEdit, handleCancelEdit, departments }) => {
-  console.log(handleEdit)
+const ClientRow = ({ client, handleOpenColorPicker, handleDeleteClient, history, client_id, colorPickerOpen, handleSaveColor, clientInputOpen, handleOpenEdit, handleChange, clientForm, handleEdit, handleCancelEdit, departments, handleCloseColorPicker }) => {
   if ( clientInputOpen && client.id === client_id ) {
     return (
       <tr key={client.id} style={{ backgroundColor: client.attributes.color}}>
@@ -36,10 +35,10 @@ const ClientRow = ({ client, handleOpenColorPicker, handleDeleteClient, history,
           <Form.Control style={{ marginTop: 5}} onChange={handleChange} placeholder='Budget' name='budget' value={clientForm.budget}/>
         </td>
         <td  style={{ padding: 0 }}>
-          <Form.Control style={{ marginTop: 5 }} onChange={handleChange} type='date' placeholder='Start Date' name='start_date' value={clientForm.start_date}/>
+          <Form.Control style={{ marginTop: 5, paddingLeft: 20 }} onChange={handleChange} type='date' placeholder='Start Date' name='start_date' value={clientForm.start_date || ''}/>
         </td>
         <td style={{ minWidth: 150 }}>
-          <span onClick={() => history.push(`/history/${client.id}`, client)}>
+          <span>
             { client.attributes.last_history ? (
             <span>
               <span className='manager-name'>
@@ -58,13 +57,13 @@ const ClientRow = ({ client, handleOpenColorPicker, handleDeleteClient, history,
       <tr className='main' key={client.id} style={{ backgroundColor: client.attributes.color}}>
         <td className='icon'>
             <div className='icon-items'>
-              <MdPalette onClick={() => handleOpenColorPicker(client.id, client.attributes.color)} />
-              <MdCreate onClick={() => handleOpenEdit(client) }/>
-              <MdDelete onClick={() => handleDeleteClient(client.id)}/>
+              <MdPalette style={{ width: 20, height: 20 }} onClick={ () => { !colorPickerOpen ? handleOpenColorPicker(client.id, client.attributes.color) : handleCloseColorPicker() } } />
+              <MdCreate style={{ width: 20, height: 20 }} onClick={() => handleOpenEdit(client) }/>
+              <MdDelete style={{ width: 20, height: 20 }} onClick={() => handleDeleteClient(client.id)}/>
               </div>
 
               <div
-                className='twitter-picker' s
+                className='twitter-picker'
                 style={{ visibility: colorPickerOpen ?  client_id === client.id ? 'visible' : 'null' : 'hidden' }}>
               <TwitterPicker
                 colors={['#CAF7AE', '#FFFFC3', '#E6FFF9', '#ACC7ED', '#F4AD9C', '#DEACC3', '#E5E5E5', '#FFFFFF']}
@@ -80,8 +79,8 @@ const ClientRow = ({ client, handleOpenColorPicker, handleDeleteClient, history,
         <td>{client.attributes.estimate}</td>
         <td>{client.attributes.budget}</td>
         <td>{client.attributes.start_date}</td>
-        <td style={{ minWidth: 300, textAlign: 'left' }}>
-          <span onClick={() => history.push(`/history/${client.id}`, client)}>
+        <td style={{ minWidth: 300, textAlign: 'left', cursor: 'pointer' }} onClick={() => history.push(`/history/${client.id}`, client)}>
+          <span>
             { client.attributes.last_history ? (
             <span>
               <span className='manager-name'>

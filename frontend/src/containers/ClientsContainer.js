@@ -56,11 +56,23 @@ class ClientsContainer extends Component {
     this.props.getClientsPagination(page)
   }
 
-  handleCreateClient = (data) => {
+  handleCreateClient = (e, data) => {
     const { currentPage } = this.state
+    e.preventDefault()
 
     this.props.onCreateClient(data)
     this.props.getClientsPagination(currentPage)
+
+    this.setState({
+      clientForm: {
+        name: '',
+        project: '',
+        department: '',
+        estimate: '',
+        budget: '',
+        start_date: ''
+      },
+    })
   }
 
   handleDeleteClient = (id) => {
@@ -119,7 +131,6 @@ class ClientsContainer extends Component {
   }
 
   render() {
-    console.log(this.state.clientForm)
     return (
       <div>
         <NavBar history={this.props.history} />

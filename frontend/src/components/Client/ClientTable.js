@@ -39,7 +39,7 @@ const ClientTable = ({
       </tr>
     </thead>
     <tbody>
-      {clients.map((client) => (
+      {clients.map((client, index) => (
         <ClientRow
           client={client}
           handleOpenColorPicker={handleOpenColorPicker}
@@ -55,6 +55,8 @@ const ClientTable = ({
           handleEdit={handleEdit}
           handleCancelEdit={handleCancelEdit}
           departments={departments}
+          key={index}
+          handleCloseColorPicker={handleCloseColorPicker}
         />
       ))}
     </tbody>

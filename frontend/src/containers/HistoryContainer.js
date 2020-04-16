@@ -48,10 +48,19 @@ class HistoryContainer extends Component {
     this.props.getHistoryPagitation(page)
   }
 
-  handleCreateHistory = (data) => {
-    this.props.onCreateHistory(data)
+  handleCreateHistory = (e, data) => {
+    e.preventDefault()
 
+    this.props.onCreateHistory(data)
     this.props.getHistoryPagitation(this.state.currentPage)
+
+    this.setState({
+      historyForm: {
+        client_id: this.props.match.params.id,
+        action: '',
+        date: ''
+      },
+    })
   }
 
 
@@ -78,7 +87,8 @@ class HistoryContainer extends Component {
 const mapStateToProps = (state) => ({
   historyData: state.history.data,
   pagy: state.history.pagy,
-  loading: state.clients.loading
+  loading: state.clients.loading,
+  client: state.clients.client
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => {
@@ -87,7 +97,8 @@ const mapDispatchToProps = (dispatch, ownProps) => {
     onShowClient: () => dispatch(resourceShowRequest(`/clients/${id}`)),
     getHistory: () => dispatch(resourceGetRequest(`history?client_id=${id}`)),
     onCreateHistory: (data) => dispatch(resourceCreateRequest('history', data)),
-    getHistoryPagitation: (page) => dispatch(resourceGetRequest(`history?client_id=${id}&page=${page}`))
+    getHistoryPagitation: (page) => dispatch(resourceGetRequest(`history?client_id=${id}&page=${page}`)),
+    onShowClient: () => dispatch(resourceShowRequest(`/clients/${id}`))
   })
 }
 
