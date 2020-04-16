@@ -1,8 +1,12 @@
-class ApplicationController < ActionController::Base
+class ApplicationController < ActionController::API
   include ActionController::Cookies
   include Pagy::Backend
 
    before_action :authenticate_maneger
+
+   def fallback_index_html
+     render :file => 'public/index.html'
+   end
 
    private
 
@@ -23,8 +27,4 @@ class ApplicationController < ActionController::Base
    def unauthorized
      render json: { errors: 'Unauthorized' }, status: :unauthorized
    end
-
-   def fallback_index_html
-     render :file => 'public/index.html'
-  end
 end
