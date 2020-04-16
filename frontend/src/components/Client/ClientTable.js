@@ -4,7 +4,6 @@ import { MdPalette, MdCreate, MdDelete} from 'react-icons/md'
 import { TwitterPicker } from 'react-color';
 import ClientRow from './ClientRow'
 import { Form, Button } from 'react-bootstrap'
-import Editable from 'react-x-editable';
 
 const ClientTable = ({
   clients,
