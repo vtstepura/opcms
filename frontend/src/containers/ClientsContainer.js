@@ -14,7 +14,7 @@ class ClientsContainer extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      client: {
+      clientForm: {
         name: '',
         project: '',
         department: '',
@@ -43,11 +43,11 @@ class ClientsContainer extends Component {
     const fieldName = event.target.name
     const fleldVal = event.target.value
 
-    this.setState({ client: {...this.state.client, [fieldName]: fleldVal} })
+    this.setState({ clientForm: {...this.state.clientForm, [fieldName]: fleldVal} })
   }
 
   handleSetStartDate = (date) => {
-    this.setState({ client: { ...this.state.client, start_date: date }})
+    this.setState({ clientForm: { ...this.state.clientForm, start_date: date }})
   }
 
   onChange = (page) => {
@@ -100,19 +100,32 @@ class ClientsContainer extends Component {
 
   handleOpenEdit = (client) => {
     this.setState({
-      client: client.attributes,
+      clientForm: client.attributes,
       client_id: client.id,
       clientInputOpen: true
     })
   }
 
+  handleEdit = () => {
+    const { clientForm, client_id } = this.state
+
+    this.props.onUpdateClient(client_id, clientForm)
+
+    this.setState({ clientInputOpen: false })
+  }
+
+  handleCancelEdit = () => {
+    this.setState({ clientInputOpen: false })
+  }
+
   render() {
+    console.log(this.state.clientForm)
     return (
       <div>
         <NavBar history={this.props.history} />
         <Client
           {...this.props}
-          client={this.state.client}
+          clientForm={this.state.clientForm}
           handleChange={this.handleChange}
           currentPage={this.state.currentPage}
           pagy={this.props.pagy}
@@ -132,6 +145,8 @@ class ClientsContainer extends Component {
           handleDeleteClient={this.handleDeleteClient}
           clientInputOpen={this.state.clientInputOpen}
           handleOpenEdit={this.handleOpenEdit}
+          handleEdit={this.handleEdit}
+          handleCancelEdit={this.handleCancelEdit}
         />
       </div>
     )
@@ -149,7 +164,8 @@ const mapDispatchToProps = (dispatch) => ({
   getClientsPagination: (page) => dispatch(resourceGetRequest(`clients?page=${page}`)),
   onCreateClient: (data) => dispatch(resourceCreateRequest('clients', data)),
   onDeleteClient: (id) => dispatch(resourceDeleteRequest(`clients/${id}`)),
-  setColor: (id, data) => dispatch(resourceUpdateRequest(`clients/${id}`, data))
+  setColor: (id, data) => dispatch(resourceUpdateRequest(`clients/${id}`, data)),
+  onUpdateClient: (id, data) => dispatch(resourceUpdateRequest(`/clients/${id}`, data))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClientsContainer)

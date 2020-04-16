@@ -24,16 +24,16 @@ const EditClient = ({ client, clientForm, onUpdateClient, handleChange, handleSe
         <FormGroup>
           <Form.Label>Department</Form.Label>
           <Form.Control className='input' as="select" onChange={handleChange} value={client.department}  name='department'>
-              <option>Department</option>
-              {departments.map(d =>
-                <option id = { d.id } key={ d.id } value={ d.name } >{d.name}</option>
-              )};
-            </Form.Control>
+            <option>Department</option>
+            {departments.map(d =>
+              <option id = { d.id } key={ d.id } value={ d.name } >{d.name}</option>
+            )};
+          </Form.Control>
         </FormGroup>
 
         <FormGroup>
           <Form.Label>Estimate</Form.Label>
-          <Form.Control placeholder='Estimate' name='estimate'  onChange={handleChange} value={clientForm.estimate} />
+          <Form.Control placeholder='Estimate' name='estimate' onChange={handleChange} value={clientForm.estimate} />
         </FormGroup>
 
         <FormGroup>

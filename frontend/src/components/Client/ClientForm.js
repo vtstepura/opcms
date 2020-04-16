@@ -1,7 +1,7 @@
 import React from 'react'
 import { Form, Button } from 'react-bootstrap'
 
-const ClientForm = ({ handleChange, client, departments, handleCreateClient }) => (
+const ClientForm = ({ handleChange, clientForm, departments, handleCreateClient }) => (
   <Form>
     <Form.Group className='client-form'>
       <Form.Control className='input' onChange={handleChange} placeholder="Name" name="name" />
@@ -15,7 +15,7 @@ const ClientForm = ({ handleChange, client, departments, handleCreateClient }) =
       <Form.Control className='input' type="number" onChange={handleChange} placeholder="Estimate" name="estimate"/>
       <Form.Control className='input' type="number" onChange={handleChange} placeholder="Budget" name="budget" />
       <Form.Control className='input' type='date' onChange={handleChange} placeholder="start_date" name="start_date" />
-      <Button variant="primary" onClick={() => handleCreateClient(client)}>Create</Button>
+      <Button variant="primary" onClick={() => handleCreateClient(clientForm)}>Create</Button>
     </Form.Group>
   </Form>
 )

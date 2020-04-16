@@ -34,16 +34,6 @@
 .client-list {
   height: 620px;
 }
-table {
-  width: 100%;
-  text-align: center;
-}
-td {
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  height: 50px;
-}
 
 .client-form {
   display: flex;
@@ -100,7 +90,7 @@ td {
  }
 
 .icon-items {
-  display: block;
+  display: none;
 }
 
 .icon {
@@ -115,4 +105,20 @@ tr:hover > .icon > .icon-items {
 }
 .twitter-picker {
   position: absolute;
+}
+
+.input-edit {
+  margin: 0px;
+}
+
+td {
+  overflow: hidden;
+  max-width: 100px;
+  text-overflow: ellipsis;
+  text-align: center;
+  height: 50px
+}
+
+tr {
+  text-align: center;
 }

@@ -1,50 +1,44 @@
 import React from 'react'
-import { MdPalette, MdCreate, MdDelete} from 'react-icons/md'
+import { MdPalette, MdCreate, MdDelete, MdSave, MdCancel } from 'react-icons/md'
 import { TwitterPicker } from 'react-color';
 import { Form, Button, FormGroup } from 'react-bootstrap'
 
 
-const ClientRow = ({ client, handleOpenColorPicker, handleDeleteClient, history, client_id, colorPickerOpen, handleSaveColor, clientInputOpen, handleOpenEdit, handleChange }) => {
-  if ( clientInputOpen ) {
+const ClientRow = ({ client, handleOpenColorPicker, handleDeleteClient, history, client_id, colorPickerOpen, handleSaveColor, clientInputOpen, handleOpenEdit, handleChange, clientForm, handleEdit, handleCancelEdit, departments }) => {
+  console.log(handleEdit)
+  if ( clientInputOpen && client.id === client_id ) {
     return (
-      <tr>
-      <td className='icon' >
-          <div className='icon-items'>
-            <MdPalette onClick={() => handleOpenColorPicker(client.id, client.attributes.color)} />
-            <MdCreate />
-            <MdDelete onClick={() => handleDeleteClient(client.id)}/>
-            </div>
-
-            <div
-              className='twitter-picker' s
-              style={{ visibility: colorPickerOpen ?  client_id === client.id ? 'visible' : 'null' : 'hidden' }}>
-            <TwitterPicker
-              colors={['#CAF7AE', '#FFFFC3', '#E6FFF9', '#ACC7ED', '#F4AD9C', '#DEACC3', '#E5E5E5', '#FFFFFF']}
-              onChangeComplete={ (color) => handleSaveColor(color, client.id) }
-            />
-            </div >
-            <div>
-          </div>
+      <tr key={client.id} style={{ backgroundColor: client.attributes.color}}>
+      <td >
+        <div>
+          <MdCancel onClick={() => handleCancelEdit()} />
+          <MdSave onClick={() => handleEdit() }/>
+        </div>
       </td>
-        <td>
-        <Form.Control type='name' placeholder='Name' onChange={handleChange} name='name' value={client.attributes.name}/>
+        <td style={{ padding: 0 }}>
+          <Form.Control style={{ marginTop: 5 }} onChange={handleChange} type='name' placeholder='Name' onChange={handleChange} name='name' value={clientForm.name}/>
         </td>
-        <td>
-        <Form.Control type='name' placeholder='Name' name='name' value={client.attributes.project}/>
+        <td  style={{ padding: 0 }}>
+          <Form.Control style={{ marginTop: 5 }} onChange={handleChange} placeholder='Project' name='project' value={clientForm.project}/>
         </td>
-        <td>
-        <Form.Control type='name' placeholder='Name' name='name' value={client.attributes.department}/>
+        <td  style={{ padding: 0 }}>
+          <Form.Control style={{ marginTop: 5 }} className='input' as="select" onChange={handleChange}  name='department'>
+              <option>Department</option>
+              {departments.map(d =>
+                <option id = { d.id } key={ d.id } value={ d.name } >{d.name}</option>
+              )};
+            </Form.Control>
         </td>
-        <td>
-        <Form.Control type='name' placeholder='Name' name='name' value={client.attributes.estimate}/>
+        <td  style={{ padding: 0 }}>
+          <Form.Control style={{ marginTop: 5}} onChange={handleChange} placeholder='Estimate' name='estimate' value={clientForm.estimate}/>
         </td>
-        <td>
-        <Form.Control type='name' placeholder='Name' name='name' value={client.attributes.budget}/>
+        <td  style={{ padding: 0 }}>
+          <Form.Control style={{ marginTop: 5}} onChange={handleChange} placeholder='Budget' name='budget' value={clientForm.budget}/>
         </td>
-        <td>
-        <Form.Control type='name' placeholder='Name' name='name' value={client.attributes.start_date}/>
+        <td  style={{ padding: 0 }}>
+          <Form.Control style={{ marginTop: 5 }} onChange={handleChange} type='date' placeholder='Start Date' name='start_date' value={clientForm.start_date}/>
         </td>
-        <td className='history-column'>
+        <td style={{ minWidth: 150 }}>
           <span onClick={() => history.push(`/history/${client.id}`, client)}>
             { client.attributes.last_history ? (
             <span>
@@ -62,7 +56,7 @@ const ClientRow = ({ client, handleOpenColorPicker, handleDeleteClient, history,
   } else {
     return (
       <tr className='main' key={client.id} style={{ backgroundColor: client.attributes.color}}>
-        <td className='icon' >
+        <td className='icon'>
             <div className='icon-items'>
               <MdPalette onClick={() => handleOpenColorPicker(client.id, client.attributes.color)} />
               <MdCreate onClick={() => handleOpenEdit(client) }/>
@@ -80,13 +74,13 @@ const ClientRow = ({ client, handleOpenColorPicker, handleDeleteClient, history,
               <div>
             </div>
         </td>
-        <td>{client.attributes.name}</td>
+        <td >{client.attributes.name}</td>
         <td>{client.attributes.project}</td>
         <td>{client.attributes.department}</td>
         <td>{client.attributes.estimate}</td>
         <td>{client.attributes.budget}</td>
         <td>{client.attributes.start_date}</td>
-        <td className='history-column'>
+        <td style={{ minWidth: 300, textAlign: 'left' }}>
           <span onClick={() => history.push(`/history/${client.id}`, client)}>
             { client.attributes.last_history ? (
             <span>

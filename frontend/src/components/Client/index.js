@@ -8,7 +8,7 @@ import ColorPicker from './ColorPicker'
 
 const Client = ({
   clients,
-  client,
+  clientForm,
   handleChange,
   currentPage,
   pagy,
@@ -29,13 +29,15 @@ const Client = ({
   onDeleteClient,
   renderRow,
   clientInputOpen,
-  handleOpenEdit
+  handleOpenEdit,
+  handleEdit,
+  handleCancelEdit
  }) => (
   <div className='client'>
       <div className='client-list'>
         <ClientForm
           handleChange={handleChange}
-          client={client}
+          clientForm={clientForm}
           departments={departments}
           handleCreateClient={handleCreateClient}
         />
@@ -55,6 +57,11 @@ const Client = ({
           clientInputOpen={clientInputOpen}
           handleOpenEdit={handleOpenEdit}
           handleChange={handleChange}
+          clientForm={clientForm}
+          handleChange={handleChange}
+          handleEdit={handleEdit}
+          handleCancelEdit={handleCancelEdit}
+          departments={departments}
         />
       </div>
       <Paginator
