@@ -1,1 +1,1 @@
-export const apiUrl = 'http://localhost:3000/api/v1'
+export const apiUrl = 'https://https://whispering-wildwood-08364.herokuapp.com/api/v1'
