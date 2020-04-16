@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from 'redux-saga/effects'
+import { put, call, takeLeading } from 'redux-saga/effects'
 import { toastr } from 'react-redux-toastr'
 
 
@@ -13,10 +13,12 @@ function* indexResource(api, { resource, thunk }) {
   }
 }
 
-function* createResource(api, { data }, { resource, thunk }) {
+function* createResource(api, { data }, { resource, client_id, thunk }) {
+  const id = 93
   try {
     const detail = yield call([api, api.post], `/${resource}`,  data)
     yield put(actions.resourceCreateSuccess(resource, detail, { data }, thunk))
+    yield put(actions.resourceGetRequest(`history?client_id=${client_id}`, detail, thunk))
     toastr.success('Success!', 'Created new history!')
   } catch (e) {
     yield put(actions.resourceCreateFailure(resource, e, { data }, thunk))
@@ -34,6 +36,6 @@ function* watchResourceIndexRequest(api, { meta }) {
 }
 
 export default function* ({ api }) {
-  yield takeLatest(actions.RESOURCE_GET_REQUEST, watchResourceIndexRequest, api)
-  yield takeLatest(actions.RESOURCE_CREATE_REQUEST, watchResourceCreateRequest, api)
+  yield takeLeading(actions.RESOURCE_GET_REQUEST, watchResourceIndexRequest, api)
+  yield takeLeading(actions.RESOURCE_CREATE_REQUEST, watchResourceCreateRequest, api)
 }

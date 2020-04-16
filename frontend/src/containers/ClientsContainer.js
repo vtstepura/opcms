@@ -60,8 +60,7 @@ class ClientsContainer extends Component {
     const { currentPage } = this.state
     e.preventDefault()
 
-    this.props.onCreateClient(data)
-    this.props.getClientsPagination(currentPage)
+    this.props.onCreateClient(data, currentPage)
 
     this.setState({
       clientForm: {
@@ -76,7 +75,9 @@ class ClientsContainer extends Component {
   }
 
   handleDeleteClient = (id) => {
-    this.props.onDeleteClient(id)
+    const { currentPage } = this.state
+
+    this.props.onDeleteClient(id, currentPage)
   }
 
   handleOpenColorPicker= (id, color) => {
@@ -98,7 +99,7 @@ class ClientsContainer extends Component {
   handleSaveColor = (color) => {
     const { client_id, currentPage } = this.state
 
-    this.props.setColor(client_id, { color: color.hex })
+    this.props.setColor(client_id, { color: color.hex }, currentPage)
 
     this.setState({ colorPickerOpen: false })
   }
@@ -119,9 +120,9 @@ class ClientsContainer extends Component {
   }
 
   handleEdit = () => {
-    const { clientForm, client_id } = this.state
+    const { clientForm, client_id, currentPage } = this.state
 
-    this.props.onUpdateClient(client_id, clientForm)
+    this.props.onUpdateClient(client_id, clientForm, currentPage)
 
     this.setState({ clientInputOpen: false })
   }
@@ -173,10 +174,10 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getClients: () => dispatch(resourceGetRequest('clients')),
   getClientsPagination: (page) => dispatch(resourceGetRequest(`clients?page=${page}`)),
-  onCreateClient: (data) => dispatch(resourceCreateRequest('clients', data)),
-  onDeleteClient: (id) => dispatch(resourceDeleteRequest(`clients/${id}`)),
-  setColor: (id, data) => dispatch(resourceUpdateRequest(`clients/${id}`, data)),
-  onUpdateClient: (id, data) => dispatch(resourceUpdateRequest(`/clients/${id}`, data))
+  onCreateClient: (data, currentPage) => dispatch(resourceCreateRequest('clients', data, currentPage)),
+  onDeleteClient: (id, currentPage) => dispatch(resourceDeleteRequest(`clients/${id}`, currentPage)),
+  setColor: (id, data, currentPage) => dispatch(resourceUpdateRequest(`clients/${id}`, data, currentPage)),
+  onUpdateClient: (id, data, currentPage) => dispatch(resourceUpdateRequest(`/clients/${id}`, data, currentPage))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(ClientsContainer)

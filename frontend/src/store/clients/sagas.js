@@ -1,4 +1,4 @@
-import { put, call, takeLatest } from 'redux-saga/effects'
+import { put, call, takeLatest, takeLeading } from 'redux-saga/effects'
 import { toastr } from 'react-redux-toastr'
 
 import * as actions from './actions'
@@ -12,10 +12,11 @@ function* indexResource(api, { resource, thunk }) {
   }
 }
 
-function* createResource(api, { data }, { resource, thunk }) {
+function* createResource(api, { data }, { resource, currentPage, thunk }) {
   try {
     const detail = yield call([api, api.post], `/${resource}`,  data)
     yield put(actions.resourceCreateSuccess(resource, detail, thunk))
+    yield put(actions.resourceGetRequest(`/clients?page=${currentPage}`, detail, thunk))
     toastr.success('Success!', 'Created new client!')
   } catch (e) {
     yield put(actions.resourceCreateFailure(resource, e, { data }, thunk))
@@ -24,11 +25,11 @@ function* createResource(api, { data }, { resource, thunk }) {
 }
 
 
-function* deleteResource(api, { resource, thunk }) {
+function* deleteResource(api, { resource, currentPage, thunk }) {
   try {
     const detail = yield call([api, api.delete], `/${resource}`)
     yield put(actions.resourceDeleteSuccess(resource, detail, thunk))
-    yield put(actions.resourceGetRequest('/clients', detail, thunk))
+    yield put(actions.resourceGetRequest(`/clients?page=${currentPage}`, detail, thunk))
     toastr.success('Success! Deleted client!')
   } catch (e) {
     yield put(actions.resourceDeleteFailure(resource, e, thunk))
@@ -45,11 +46,11 @@ function* showResource(api, { resource, thunk }) {
   }
 }
 
-function* updateResource(api, { data }, { resource, thunk }) {
+function* updateResource(api, { data }, { resource, currentPage, thunk }) {
   try {
     const detail = yield call([api, api.put], `/${resource}`,  data)
     yield put(actions.resourceUpdateSuccess(resource, detail, { data }, thunk))
-    yield put(actions.resourceGetRequest('/clients', detail, thunk))
+    yield put(actions.resourceGetRequest(`/clients?page=${currentPage}`, detail, thunk))
     toastr.success('Success', 'Updated!')
   } catch (e) {
     yield put(actions.resourceUpdateFailure(resource, e, { data }, thunk))
@@ -78,9 +79,9 @@ function* watchResourceIndexRequest(api, { meta }) {
 }
 
 export default function* ({ api }) {
-  yield takeLatest(actions.RESOURCE_GET_REQUEST, watchResourceIndexRequest, api)
-  yield takeLatest(actions.RESOURCE_CREATE_REQUEST, watchResourceCreateRequest, api)
-  yield takeLatest(actions.RESOURCE_UPDATE_REQUEST, watchResourceUpdateRequest, api)
-  yield takeLatest(actions.RESOURCE_DELETE_REQUEST, watchResourceDeleteRequest, api)
-  yield takeLatest(actions.RESOURCE_SHOW_REQUEST, watchResourceShowRequest, api)
+  yield takeLeading(actions.RESOURCE_GET_REQUEST, watchResourceIndexRequest, api)
+  yield takeLeading(actions.RESOURCE_CREATE_REQUEST, watchResourceCreateRequest, api)
+  yield takeLeading(actions.RESOURCE_UPDATE_REQUEST, watchResourceUpdateRequest, api)
+  yield takeLeading(actions.RESOURCE_DELETE_REQUEST, watchResourceDeleteRequest, api)
+  yield takeLeading(actions.RESOURCE_SHOW_REQUEST, watchResourceShowRequest, api)
 }

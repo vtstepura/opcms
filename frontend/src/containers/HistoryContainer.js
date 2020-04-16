@@ -49,10 +49,11 @@ class HistoryContainer extends Component {
   }
 
   handleCreateHistory = (e, data) => {
+    const { client_id } = this.state.historyForm
+
     e.preventDefault()
 
-    this.props.onCreateHistory(data)
-    this.props.getHistoryPagitation(this.state.currentPage)
+    this.props.onCreateHistory(data, client_id)
 
     this.setState({
       historyForm: {
@@ -96,7 +97,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return ({
     onShowClient: () => dispatch(resourceShowRequest(`/clients/${id}`)),
     getHistory: () => dispatch(resourceGetRequest(`history?client_id=${id}`)),
-    onCreateHistory: (data) => dispatch(resourceCreateRequest('history', data)),
+    onCreateHistory: (data, client_id) => dispatch(resourceCreateRequest('history', data, client_id)),
     getHistoryPagitation: (page) => dispatch(resourceGetRequest(`history?client_id=${id}&page=${page}`)),
     onShowClient: () => dispatch(resourceShowRequest(`/clients/${id}`))
   })

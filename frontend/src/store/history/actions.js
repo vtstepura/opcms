@@ -33,11 +33,12 @@ export const RESOURCE_CREATE_REQUEST = 'CREATE_HISTORY_REQUEST'
 export const RESOURCE_CREATE_SUCCESS = 'CREATE_HISTORY_SUCCEEDED'
 export const RESOURCE_CREATE_FAILURE = 'CREATE_HISTORY_FAILED'
 
-export const resourceCreateRequest = (resource, data) => ({
+export const resourceCreateRequest = (resource, data, client_id) => ({
   type: RESOURCE_CREATE_REQUEST,
   payload: { data },
   meta: {
     resource,
+    client_id,
     thunk: `${resource}Create`
   }
 })

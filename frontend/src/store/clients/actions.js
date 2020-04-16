@@ -33,11 +33,12 @@ export const RESOURCE_CREATE_REQUEST = 'CREATE_CLIENT_REQUEST'
 export const RESOURCE_CREATE_SUCCESS = 'CREATE_CLIENT_SUCCEEDED'
 export const RESOURCE_CREATE_FAILURE = 'CREATE_CLIENT_FAILED'
 
-export const resourceCreateRequest = (resource, data) => ({
+export const resourceCreateRequest = (resource, data, currentPage) => ({
   type: RESOURCE_CREATE_REQUEST,
   payload: { data },
   meta: {
     resource,
+    currentPage,
     thunk: `${resource}Create`
   }
 })
@@ -67,10 +68,11 @@ export const RESOURCE_DELETE_REQUEST = 'DELETE_CLIENT_REQUEST'
 export const RESOURCE_DELETE_SUCCESS = 'DELETE_CLIENT_SUCCEEDED'
 export const RESOURCE_DELETE_FAILURE = 'DELETE_CLIENT_FAILED'
 
-export const resourceDeleteRequest = (resource) => ({
+export const resourceDeleteRequest = (resource, currentPage) => ({
   type: RESOURCE_DELETE_REQUEST,
   meta: {
     resource,
+    currentPage,
     thunk: `${resource}Delete`
   }
 })
@@ -133,11 +135,12 @@ export const RESOURCE_UPDATE_REQUEST = 'UPDATE_CLIENT_REQUEST'
 export const RESOURCE_UPDATE_SUCCESS = 'UPDATE_CLIENT_SUCCEEDED'
 export const RESOURCE_UPDATE_FAILURE = 'UPDATE_CLIENT_FAILED'
 
-export const resourceUpdateRequest = (resource, data, history) => ({
+export const resourceUpdateRequest = (resource, data, currentPage) => ({
   type: RESOURCE_UPDATE_REQUEST,
   payload: { data },
   meta: {
     resource,
+    currentPage,
     thunk: `${resource}Update`
   }
 })
